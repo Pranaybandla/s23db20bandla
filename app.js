@@ -4,11 +4,53 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config(); 
+const connectionString =  process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString); 
+
+//Get the default connection 
+var db = mongoose.connection; 
+//Bind connection to error event  
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){  console.log("Connection to DB succeeded")}); 
+
+var university = require("./models/university"); 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var universityRouter = require('./routes/university');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
+
+
+// We can seed the collection if needed on server start 
+async function recreateDB(){ 
+    // Delete everything   
+    await university.deleteMany(); 
+    let instance1 = new university({university_id:123,  name:'NWMSU', location:'maryville'});
+    instance1.save().then(doc=>{     
+      console.log("First object saved")}   
+      ).catch(err=>{    
+         console.error(err)   
+        }); 
+        let instance2 = new university({university_id:456,  name:'UCM', location:'Springfield'});
+    instance2.save().then(doc=>{     
+      console.log("second object saved")}   
+      ).catch(err=>{    
+         console.error(err)   
+        });
+        let instance3 = new university({university_id:789,  name:'UNT', location:'Denton'});
+    instance3.save().then(doc=>{     
+      console.log("third object saved")}   
+      ).catch(err=>{    
+         console.error(err)   
+        });
+}
+let reseed = true; 
+if (reseed) {recreateDB();}
+
 
 var app = express();
 
@@ -27,6 +69,8 @@ app.use('/users', usersRouter);
 app.use('/university', universityRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

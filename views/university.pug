@@ -3,13 +3,12 @@ extends layout
 block content
   h1= title
 
-  - var university = [{ university_id: 123, university_name: 'NWMSU', university_location: 'Maryville' },{ university_id: 456, university_name: 'UNT', university_location: 'Dallas' },{ university_id: 789, university_name: 'UCM', university_location: 'Kansas City' }]
-
+  - var university = results;
   div(class="container-fluid")
 
     div(class="row")
       each f, index in university
-        div(class="col-sm-2", onclick=`buy(${index})` ) #{f.university_id}, #{f.university_name}, #{f.university_location}
+        div(class="col-md-2", onclick=`buy(${index})` ) #{f.university_id}, #{f.name}, #{f.location}
         script.
           function buy(index)
           {

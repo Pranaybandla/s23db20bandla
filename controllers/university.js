@@ -19,3 +19,15 @@ exports.university_delete = function(req, res) {
 exports.university_update_put = function(req, res) {     
     res.send('NOT IMPLEMENTED: university update PUT' + req.params.id); 
 }; 
+
+// List of all Costumes 
+exports.university_list = async function(req, res) {     
+    try{         
+        theuniversities = await university.find();         
+        res.send(theuniversities);     
+    }     
+    catch(err){         
+            res.status(500);         
+            res.send(`{"error": ${err}}`);     
+        }   
+    };

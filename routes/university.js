@@ -1,5 +1,3 @@
-
-
 var express = require('express'); 
 const university_controlers= require('../controllers/university'); 
 var router = express.Router(); 

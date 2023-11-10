@@ -52,6 +52,13 @@ let reseed = true;
 if (reseed) {recreateDB();}
 
 
+//starting of lab
+// GET request for one costume.
+
+//router.get('/university/:id', university_controller.university_detail);
+
+//ending of lab
+
 var app = express();
 
 // view engine setup

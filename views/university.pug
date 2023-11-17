@@ -2,15 +2,16 @@ extends layout
 
 block content
   h1= title
-
-  - var university = results;
+  - let university = results;
   div(class="container-fluid")
+    div(class="row m-1")
+      each item in university
+        - let destination = `dispatch("/university/update?id=${item._id}")`
+        div(class="row-sm-2 m-1") 
+          | University with id #{item.university_id} is (#{item.name}) located at #{item.location}
+          button.btn(class="btn-primary ml-1", onclick= destination) Update
 
-    div(class="row")
-      each f, index in university
-        div(class="col-md-2", onclick=`buy(${index})` ) #{f.university_id}, #{f.name}, #{f.location}
-        script.
-          function buy(index)
-          {
-            alert(`you purchased Item: ${index+1}`)
-          }
+  script.
+    function dispatch(path){
+      window.location.href = path;
+    }

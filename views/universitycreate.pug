@@ -12,6 +12,9 @@ block content
     div.form-group
       label.universityAttr(for='location') University location
       input#location(type='text', name='location')
+    div.form-group
+      label.universityAttr(for='fee') University fee
+      input#location(type='number', name='fee')
     input(type="submit")
     script.
       document.forms['universityForm'].addEventListener('submit', (event) => {

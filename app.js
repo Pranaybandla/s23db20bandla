@@ -54,19 +54,19 @@ var resourceRouter = require('./routes/resource');
 async function recreateDB(){ 
     // Delete everything   
     await university.deleteMany(); 
-    let instance1 = new university({university_id:123,  name:'NWMSU', location:'maryville'});
+    let instance1 = new university({university_id:123,  name:'NWMSU', location:'maryville', fee: 5698});
     instance1.save().then(doc=>{     
       console.log("First object saved")}   
       ).catch(err=>{    
          console.error(err)   
         }); 
-        let instance2 = new university({university_id:456,  name:'UCM', location:'Springfield'});
+        let instance2 = new university({university_id:456,  name:'UCM', location:'Springfield', fee: 6798});
     instance2.save().then(doc=>{     
       console.log("second object saved")}   
       ).catch(err=>{    
          console.error(err)   
         });
-        let instance3 = new university({university_id:789,  name:'UNT', location:'Denton'});
+        let instance3 = new university({university_id:789,  name:'UNT', location:'Denton', fee: 8765});
     instance3.save().then(doc=>{     
       console.log("third object saved")}   
       ).catch(err=>{    

@@ -3,14 +3,17 @@ extends layout
 block content
   h1= title
   - let university = results;
+  a(class="btn btn-dark" href="/university/create") Create
   div(class="container-fluid")
     div(class="row m-1")
       each item in university
         - let destination = `dispatch("/university/update?id=${item._id}")`
         div(class="row-sm-2 m-1") 
-          | University with id #{item.university_id} is (#{item.name}) located at #{item.location}
+          | University with id #{item.university_id} is (#{item.name}) located at #{item.location} and its fee is #{item.fee}
           button.btn(class="btn-primary ml-1", onclick= destination) Update
-
+          a(class="btn btn-warning" href=`/university/delete?id=${item._id}`) Delete
+          a(class="btn btn-secondary" href=`/university/detail?id=${item._id}`) Details
+     
   script.
     function dispatch(path){
       window.location.href = path;
